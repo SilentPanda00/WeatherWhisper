@@ -1,0 +1,656 @@
+:root {
+  --dark-blue: #000383;
+  --blue: #0e38ae;
+  --tropical-indigo: #858ef7;
+  --light-blue: #00d9ff;
+  --vibrant-blue: #2980b9;
+  --charcoal-black: #333;
+  --very-light-blue: #e3f4fe;
+  --cornsilk: #fffae0;
+  --lavender: #e6e6fa;
+  --jordy-blue: #a6c4f7;
+  --tangerine-yellow: #ffcd00;
+  --max-content-width: 1440px;
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+  border: 0px;
+  box-sizing: border-box;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+html {
+  /* font-family: 'Neuton', serif; */
+  font-family: "Quicksand", sans-serif;
+  font-size: 16px;
+  color: var(--very-light-blue);
+  scroll-behavior: smooth;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
+  background-color: #222;
+}
+
+header {
+  z-index: 100;
+}
+
+/* TYPOGRAPHY */
+
+nav .logo {
+  width: 35px;
+  margin-right: 1em;
+}
+
+nav .name {
+  font-weight: 700;
+}
+
+nav ul {
+  list-style-type: none;
+}
+
+nav a,
+.mobile a,
+a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: 700;
+  padding: 0.75em;
+}
+
+a {
+  padding: 0;
+}
+
+.nav-active {
+  border-bottom: 2px solid var(--tangerine-yellow);
+  color: var(--tangerine-yellow);
+}
+
+.mobile-menu .nav-active {
+  background-color: var(--vibrant-blue);
+}
+
+.app-title h1 {
+  font-size: 1.75rem;
+}
+
+/* LAYOUT */
+
+.flex {
+  display: flex;
+}
+
+.grid {
+  display: grid;
+}
+
+body {
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+nav {
+  justify-content: space-between;
+  max-width: var(--max-content-width);
+  margin: 0 auto;
+  padding: 0 2em;
+}
+
+nav .logo-and-name {
+  align-items: center;
+}
+
+nav ul {
+  align-items: center;
+}
+
+.search-container {
+  position: relative;
+  display: inline-block;
+  /* margin-bottom: 2px; */
+  height: 44px;
+  width: 50px;
+  vertical-align: bottom;
+}
+
+.searchbutton {
+  position: absolute;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  height: 44px;
+  line-height: 45px;
+  text-align: center;
+  cursor: pointer;
+}
+.search:focus + .searchbutton {
+  transition-duration: 0.4s;
+  background-color: white;
+  color: black;
+}
+
+.search {
+  position: absolute;
+  left: 50px; /* Button width-1px (Not 50px/100% because that will sometimes show a 1px line between the search box and button) */
+  font-size: 1rem;
+  background-color: white;
+  outline: none;
+  border: none;
+  padding: 0;
+  width: 0;
+  height: 100%;
+  z-index: 10;
+}
+
+.search:focus {
+  width: 250px; /* Bar width+1px */
+  padding: 0 16px 0 0;
+}
+
+.expandright {
+  left: auto;
+  right: 49px; /* Button width-1px */
+}
+
+.expandright:focus {
+  padding: 0 0 0 16px;
+}
+
+.mobile-menu {
+  display: none;
+  position: relative;
+  height: 44px;
+  width: 50px;
+  opacity: 1;
+}
+
+.mobile-menu .mobile-button {
+  position: absolute;
+  width: 100%;
+  display: inline-block;
+  height: 44px;
+  line-height: 45px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.mobile {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+
+  width: 100%;
+  border: 2px solid var(--light-blue);
+  background-color: #222;
+  /* overflow: hidden; */
+  transition: 0.4s ease-in;
+  z-index: 10000;
+}
+
+.side {
+  transform: translateX(-100%);
+}
+
+.mobile a {
+  display: block;
+  text-align: center;
+}
+
+.close-menu-button {
+  padding: 1em;
+  text-align: center;
+}
+
+.searchbutton:hover,
+nav a:hover,
+.mobile-menu:hover .mobile-button:hover,
+.slider__btn:hover,
+.close-menu-button,
+.btn:hover/*,
+.card-side:hover*/ {
+  transition-duration: 0.4s;
+  background-color: var(--vibrant-blue);
+  color: var(--tangerine-yellow);
+}
+
+main {
+  flex-grow: 1;
+  /* position: relative; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+section {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: var(--max-content-width);
+  padding: 2em;
+  background: var(--charcoal-black);
+}
+
+section > p {
+  margin-bottom: 1em;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--light-blue);
+}
+
+.app-title {
+  text-align: center;
+}
+
+.app-title h1 {
+  margin-bottom: 1em;
+}
+
+.carousel {
+  width: 90%;
+  height: 60vh;
+  position: relative;
+  /* max-width: 1024px; */
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 80%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  transition: transform 0.5s, opacity 0.5s, z-index 0.5s;
+  z-index: 1;
+  opacity: 0;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+/* resp */
+
+.slide.active {
+  z-index: 100;
+  opacity: 1;
+}
+
+.slide.next {
+  transform: translateX(+100%);
+}
+
+.slide.prev {
+  transform: translateX(-200%);
+}
+
+.slide.swipe-me {
+  animation: swipe-me 2s infinite;
+}
+
+@keyframes swipe-me {
+  100% {
+    transform: translateX(-5px);
+  }
+}
+
+.slider__btn {
+  position: absolute;
+  display: block;
+  top: 0%;
+  background: var(--charcoal-black);
+  color: var(--very-light-blue);
+  /* border-radius: 50%; */
+  height: 80%;
+  width: 5rem;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.slider__btn--left {
+  left: 6%;
+  /* transform: translate(-50%, 50%); */
+}
+
+.slider__btn--right {
+  right: 6%;
+  /* transform: translate(50%, 50%); */
+}
+
+.dots {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+}
+
+.dots__dot {
+  background-color: #b9b9b9;
+  opacity: 0.7;
+  height: 1rem;
+  width: 1rem;
+  border-radius: 50%;
+  margin-right: 1.75rem;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.dots__dot:last-child {
+  margin: 0;
+}
+
+.dots__dot--active {
+  /* background-color: #fff; */
+  background-color: var(--tangerine-yellow);
+  opacity: 1;
+}
+
+.card {
+  min-width: 200px;
+  width: 275px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 700;
+  /* color: var(--dark-blue); */
+  background: var(--charcoal-black);
+  padding: 1em;
+  text-align: center;
+  /* border-radius: 1em; */
+}
+
+.card:hover {
+  background: var(--vibrant-blue);
+}
+
+.weather-icon {
+  width: 100px;
+}
+
+.temperature {
+  font-size: 3rem;
+  font-weight: 400;
+}
+
+footer {
+  min-height: 2em;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+/* footer > div {
+  display: block;
+} */
+
+.hidden {
+  display: none;
+}
+
+/* WEATHER PAGE */
+
+.current-weather {
+  grid-template-columns: repeat(3, 30%);
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 1em;
+}
+
+.daily-weather,
+.hourly-weather {
+  width: 90%;
+  gap: 1em;
+  justify-content: flex-start;
+  margin: 0 auto;
+  scroll-behavior: smooth;
+  overflow-x: auto;
+}
+
+.weather-container {
+  position: relative;
+}
+
+hr {
+  width: 100%;
+  margin: 0 auto;
+  border-top: 1px solid var(--very-light-blue);
+}
+
+.current-weather > div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  border-radius: 0.5em;
+  padding: 1.5em;
+  background-color: #222;
+  box-shadow: 0px 0px 10px 0px hsla(0, 0%, 0%, 0.5);
+}
+
+.current-weather > div:nth-child(1) {
+  border: 1px solid var(--very-light-blue);
+  grid-row: -1/5;
+  align-items: flex-start;
+  justify-content: space-around;
+
+  padding: 2em;
+}
+
+.current-weather > div > span {
+  font-size: 1.75rem;
+  color: var(--jordy-blue);
+}
+
+.card-side {
+  width: 175px; /* Adjust the width of each card as needed */
+  min-width: 175px;
+  height: 250px;
+  background-color: #222;
+  border-radius: 0.5em;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.card-side > div {
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-side .temperature {
+  font-size: 1.75rem;
+}
+
+.about {
+  background: url(/Pictures/lightning.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-shadow: inset 0 0 0 100vw rgba(34, 34, 34, 0.5);
+}
+
+.about > section {
+  background-color: initial;
+}
+
+/* SCROLLBAR CUSTOMIZATION */
+
+.scrollbar {
+  scrollbar-width: thin; /* thin, auto, or none */
+  scrollbar-color: #333 #666; /* thumb-color track-color */
+}
+
+/* For WebKit-based browsers (Chrome, Safari) */
+/* Note: These properties require a -webkit- prefix */
+/* You can adjust the values as needed */
+.scrollbar::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: #666;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  background-color: #333;
+}
+
+.btn {
+  position: absolute;
+  height: 250px;
+  width: 4%;
+  font-size: 3rem;
+  color: inherit;
+  background-color: #222;
+  border-radius: 0.15em;
+}
+
+.btn-left {
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+.btn-right {
+  top: 0;
+  right: 0;
+  z-index: 100;
+}
+
+/* FORM STYLING */
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  width: 90%;
+  height: 100%;
+  max-height: 500px;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background: var(--charcoal-black);
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px 0px #000000;
+}
+
+#message {
+  height: 200px;
+}
+
+.form-label,
+.form-input,
+textarea,
+#submit-button {
+  display: block;
+  width: 100%;
+  border: none;
+  padding: 0.5em;
+}
+
+.form-label,
+#submit-button {
+  color: var(--light-blue);
+  font-weight: 700;
+}
+
+.form-input:focus,
+textarea:focus {
+  outline: 2px solid var(--light-blue);
+}
+
+#submit-button {
+  font-size: 1rem;
+  height: 3em;
+  color: var(--charcoal-black);
+}
+
+#submit-button:hover {
+  background-color: var(--light-blue);
+}
+
+input {
+  height: 1.5rem;
+}
+
+/* RESPONSIVE LAYOUT */
+
+@media only screen and (max-width: 860px) {
+  body {
+    min-height: 93vh;
+  }
+  section {
+    text-align: center;
+    padding: 2em 0;
+  }
+
+  .nav-interactive > ul {
+    display: none;
+  }
+
+  nav {
+    padding: 0 1em;
+  }
+
+  .mobile-menu {
+    display: block;
+  }
+
+  .current-weather {
+    grid-template-columns: repeat(1, 100%);
+    padding: 0 2em;
+  }
+
+  .current-weather > div:nth-child(1) {
+    align-items: center;
+  }
+
+  .overview {
+    align-items: center;
+  }
+
+  .daily-weather {
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    justify-content: flex-start;
+  }
+
+  .btn {
+    display: none;
+  }
+
+  .slider__btn,
+  .dots {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .app-title p {
+    display: none;
+  }
+  /* section {
+    width: 100%;
+  } */
+}

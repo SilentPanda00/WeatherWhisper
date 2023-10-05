@@ -1,0 +1,19 @@
+current:
+location
+date
+temperature
+apparent temperature
+weather
+temp interval
+wind
+precipitation
+humidity
+sealevel/surface pressure
+visibility
+soil moisture
+uv index
+isDAyorNight
+
+hourly:
+hour    weather     precipitation   temperature
+

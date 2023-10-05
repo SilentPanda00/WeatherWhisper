@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <!--Making the website addaptable to the viewport-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- GOOGLE FONTS -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Neuton:wght@700&family=Quicksand:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/src/css/style.css" />
+
+    <!-- BOOTSTRAP -->
+
+    <!-- <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    /> -->
+
+    <!-- WEBPAGE TITLE ICON -->
+    <link
+      rel="shortcut icon"
+      href="/Pictures/weather_icon.png"
+      type="image/x-icon"
+    />
+
+    <!-- FONTAWESOME CDN LINK -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- BOOTSTRAP SCRIPT -->
+    <!-- <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+      crossorigin="anonymous"
+    ></script> -->
+    <script defer type="module" src="/src/js/main.js"></script>
+
+    <title>WeatherWhisper</title>
+  </head>
+  <body class="flex">
+    <header>
+      <nav class="flex">
+        <div class="mobile-menu">
+          <div class="mobile-button">
+            <i class="fa-solid fa-bars"></i>
+          </div>
+        </div>
+
+        <div class="logo-and-name flex">
+          <div class="logo">
+            <img src="/Pictures/weather_icon.png" alt="App logo" class="logo" />
+          </div>
+
+          <p class="name">WeatherWhisper</p>
+        </div>
+        <div class="nav-interactive flex">
+          <ul class="flex">
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="/src/html/weather.html">Weather</a></li>
+            <li><a href="/src/html/locations.html">Locations</a></li>
+            <li>
+              <a class="nav-active" href="/src/html//about.html">About</a>
+            </li>
+            <li><a href="/src/html/contact.html">Contact</a></li>
+            <li><a href="/src/html/settings.html">Settings</a></li>
+          </ul>
+
+          <div class="search-container">
+            <input
+              class="search expandright"
+              id="searchright"
+              placeholder="Search for a location..."
+            />
+            <label class="searchbutton" for="searchright"
+              ><i class="fa fa-solid fa-magnifying-glass"></i
+            ></label>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="about">
+      <section>
+        <p>Instructions 👨‍🏫</p>
+        With WeatherWhisper you can browse the weather forecast for any place.
+        <br /><br />
+        Just click on the search icon on the navigation bar and write the name
+        of the location. <br /><br />
+        Or, if you want to get the forecast quicker, you can click on one of the
+        cards on the home page. <br /><br />
+        You can find out details about the current weather, the weather forecast
+        for the next days, or even hours. <br /><br />
+
+        <p>APIs 👨‍💻</p>
+        The app uses the following APIs: <br /><br />
+        <ul style="padding-left: 1em">
+          <li>
+            <a href="https://open-meteo.com/" target="_blank">OpenMeteo API</a>
+            - for the forecast data.
+            <br />
+            <br />
+          </li>
+          <li>
+            <a href="https://geocode.maps.co/" target="_blank"
+              >Maps Free Geocoding API</a
+            >
+            - for forward or reverse geocoding.
+          </li>
+        </ul>
+        <br />
+
+        <p>Credits 🙏</p>
+        Icons made by
+        <a href="https://www.freepik.com/" target="_blank">Freepik</a> from
+        <a href="https://www.flaticon.com/" target="_blank"
+          >www.flaticon.com.</a
+        >
+        and
+        <a href="https://fontawesome.com/">fontawesome.com</a>. <br /><br />
+
+        <p>Tools used 🔧</p>
+        This was built with <b>HTML</b>, <b>CSS</b>, and Vanilla
+        <b>JavaScript</b>. <br />
+
+        Check out the code here:
+        <a href="https://github.com/SilentPanda00/WeatherApp"
+          >https://github.com/SilentPanda00/WeatherApp</a
+        >
+      </section>
+    </main>
+    <footer class="flex">
+      <a href="https://github.com/open-meteo/open-meteo"
+        >https://github.com/open-meteo/open-meteo</a
+      >
+    </footer>
+    <ul class="mobile side">
+      <li>
+        <div class="close-menu-button">
+          <i class="fa-solid fa-xmark"></i>
+        </div>
+      </li>
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/src/html/weather.html">Weather</a></li>
+      <li><a href="/src/html/locations.html">Locations</a></li>
+      <li><a class="nav-active" href="/src/html/about.html">About</a></li>
+      <li><a href="/src/html/contact.html">Contact</a></li>
+      <li><a href="/src/html/settings.html">Settings</a></li>
+    </ul>
+  </body>
+</html>
