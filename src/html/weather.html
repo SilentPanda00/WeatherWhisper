@@ -70,14 +70,14 @@
         </div>
         <div class="nav-interactive flex">
           <ul class="flex">
-            <li><a href="/index.html">Home</a></li>
+            <li><a href="../../index.html">Home</a></li>
             <li>
-              <a class="nav-active" href="/src/html/weather.html">Weather</a>
+              <a class="nav-active" href="./weather.html">Weather</a>
             </li>
-            <li><a href="/src/html/locations.html">Locations</a></li>
-            <li><a href="/src/html/about.html">About</a></li>
-            <li><a href="/src/html/contact.html">Contact</a></li>
-            <li><a href="/src/html/settings.html">Settings</a></li>
+            <li><a href="./locations.html">Locations</a></li>
+            <li><a href="./about.html">About</a></li>
+            <li><a href="./contact.html">Contact</a></li>
+            <li><a href="./settings.html">Settings</a></li>
           </ul>
 
           <div class="search-container">
@@ -96,7 +96,9 @@
     <main>
       <p class="error"></p>
       <section class="hidden">
-        <p>Current weather</p>
+        <div>
+          <p>Current weather</p>
+        </div>
         <div class="current-weather grid">
           <div class="flex">
             <div class="weather-icon" id="weather-icon"></div>
@@ -142,21 +144,36 @@
         </div>
       </section>
       <section class="hidden">
-        <p>Hourly weather</p>
-        <div class="weather-container">
-          <div class="hourly-weather flex scrollbar"></div>
+        <div class="flex">
+          <p>Hourly weather</p>
 
-          <button class="btn btn-left btn-left-hourly"><</button>
-          <button class="btn btn-right btn-right-hourly">></button>
+          <select name="hours_select" id="hours_select">
+            <option value="today">Next 24h</option>
+            <option value="tomorow">Tomorow</option>
+            <option value="next-72">Next 72h</option>
+            <option value="all-week">All week</option>
+            <option value="next-week">Next week</option>
+          </select>
+        </div>
+        <div class="weather-container">
+          <div class="hourly-weather grid"></div>
+
+          <!-- <button class="btn btn-left btn-left-hourly"><</button>
+          <button class="btn btn-right btn-right-hourly">></button> -->
         </div>
       </section>
       <section class="hidden">
-        <p>Daily weather</p>
-        <div class="weather-container">
-          <div class="daily-weather flex scrollbar"></div>
-          <button class="btn btn-left btn-left-daily"><</button>
-          <button class="btn btn-right btn-right-daily">></button>
+        <div class="flex">
+          <p>Daily weather</p>
+          <select name="days_select" id="days_select">
+            <option value="this-week">This week</option>
+            <option value="next-week">Next week</option>
+          </select>
         </div>
+
+        <div class="daily-weather grid"></div>
+        <!-- <button class="btn btn-left btn-left-daily"><</button>
+          <button class="btn btn-right btn-right-daily">></button> -->
       </section>
     </main>
     <footer class="flex">
@@ -170,12 +187,12 @@
           <i class="fa-solid fa-xmark"></i>
         </div>
       </li>
-      <li><a href="/index.html">Home</a></li>
-      <li><a class="nav-active" href="/src/html/weather.html">Weather</a></li>
-      <li><a href="/src/html/locations.html">Locations</a></li>
-      <li><a href="/src/html/about.html">About</a></li>
-      <li><a href="/src/html/contact.html">Contact</a></li>
-      <li><a href="/src/html/settings.html">Settings</a></li>
+      <li><a href="../../index.html">Home</a></li>
+      <li><a class="nav-active" href="./weather.html">Weather</a></li>
+      <li><a href="./locations.html">Locations</a></li>
+      <li><a href="./about.html">About</a></li>
+      <li><a href="./contact.html">Contact</a></li>
+      <li><a href="./settings.html">Settings</a></li>
     </ul>
   </body>
 </html>

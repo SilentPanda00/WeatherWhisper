@@ -32,6 +32,7 @@ class Forecast {
       this.renderCurrentWeather(this.localHour); // Then render the weather data
       this.renderHourlyWeather();
       this.renderDailyWeather();
+      this.addListeners();
     } catch (err) {
       statusMsg.textContent = err.message;
     }
@@ -86,7 +87,6 @@ class Forecast {
 
       const coordsData = await coordsResponse.json();
 
-      console.log(coordsData.length);
       if (!coordsData.length) {
         throw new Error("Wrong location name.");
       }
@@ -160,8 +160,15 @@ class Forecast {
       .classList.remove("hidden");
   }
 
-  renderDailyWeather() {
+  renderDailyWeather(value = "this-week") {
+    let firstIndex = 0;
+    let lastIndex = 7;
+    if (value === "next-week") {
+      firstIndex = 7;
+      lastIndex = 14;
+    }
     const container = document.querySelector(".daily-weather");
+    container.innerHTML = "";
     const weekdays = [
       "Sunday",
       "Monday",
@@ -173,38 +180,76 @@ class Forecast {
     ];
     const data = this.weatherData.daily;
 
-    data.time.forEach((dateString, i) => {
+    data.time.slice(firstIndex, lastIndex).forEach((dateString, i) => {
       const date = new Date(dateString);
 
       let day =
-        i === 0 ? "Today" : i === 1 ? "Tomorrow" : weekdays[date.getDay()];
-      if (i > 6) day = "Next " + day;
+        i === 0 && firstIndex === 0
+          ? "Today"
+          : i === 1 && firstIndex === 0
+          ? "Tomorrow"
+          : weekdays[date.getDay()];
+      if (firstIndex > 6) day = "Next " + day;
 
       const html = `
       <div class="card-side flex">
-        <p class="date"> ${day}</p>
+        <p class="date card-side-smaller-text">${day}</p>
         <div class="flex">
-        <p class="temperature">${data.temperature_2m_min[i]} - ${
-        data.temperature_2m_max[i]
-      } °C</p>
           <div class="weather-icon">
             <img  src ='/Pictures/flaticon/png/${
-              weatherCode.get(data.weathercode[i]).iconDay
+              weatherCode.get(data.weathercode[i + firstIndex]).iconDay
             }-color.png'>
           </div>
+          <div class="flex">
+            <p class="temperature">${data.temperature_2m_min[i + firstIndex]}-${
+        data.temperature_2m_max[i + firstIndex]
+      }${this.weatherData.daily_units.temperature_2m_min}</p>
+            <p class = "weather card-side-smaller-text">${
+              weatherCode.get(data.weathercode[i + firstIndex]).weather
+            }</p>
+          </div>
         </div>
-        <p class = "weather">${weatherCode.get(data.weathercode[i]).weather}</p>
       </div>`;
       container.innerHTML += html;
     });
     container.closest("section").classList.remove("hidden");
     // adding the scroll on button functionality
 
-    this.applyScroll(container, "daily");
+    // this.applyScroll(container, "daily");
   }
 
-  renderHourlyWeather() {
+  renderHourlyWeather(value = "today") {
+    let firstIndex = this.localHour;
+    let lastIndex = firstIndex + 24;
+    switch (value) {
+      case "tomorow":
+        {
+          firstIndex = 24;
+          lastIndex = firstIndex + 24;
+        }
+        break;
+      case "next-72":
+        {
+          firstIndex = this.localHour;
+          lastIndex = firstIndex + 72;
+        }
+        break;
+      case "all-week":
+        {
+          firstIndex = 0;
+          lastIndex = 168;
+        }
+        break;
+      case "next-week":
+        {
+          firstIndex = 168;
+          lastIndex = 168 * 2;
+        }
+        break;
+      default:
+    }
     const container = document.querySelector(".hourly-weather");
+    container.innerHTML = "";
     const weekdays = [
       "Sunday",
       "Monday",
@@ -215,13 +260,13 @@ class Forecast {
       "Saturday",
     ];
     const data = this.weatherData.hourly;
-    data.time.slice(this.localHour, 5 * 24).forEach((dateString, i, all) => {
+    data.time.slice(firstIndex, lastIndex).forEach((dateString, i) => {
       const date = new Date(dateString);
       const hour = String(date.getHours()).padStart(2, "0") + ":00";
       let day = weekdays[new Date(dateString).getDay()];
 
-      if (i > all.length / 2 - 1) day = "Next " + day;
-      const weatherObj = weatherCode.get(data.weathercode[i]);
+      if (firstIndex === 168) day = "Next " + day;
+      const weatherObj = weatherCode.get(data.weathercode[i + firstIndex]);
       const isDay = data.is_day[date.getHours()];
       const icon = isDay
         ? weatherObj.iconDay
@@ -229,21 +274,38 @@ class Forecast {
 
       const html = `
       <div class="card-side flex">
-        <p class="date"> ${day}<br/>${hour}</p>
+        <p class="date"> <span class="card-side-smaller-text">${day}</span><br/>${hour}</p>
         <div class="flex">
-        <p class="temperature">${data.temperature_2m[i]}
-       °C</p>
           <div class="weather-icon">
             <img  src ='/Pictures/flaticon/png/${icon}-color.png'>
           </div>
+          <div class="flex">
+            <p class="temperature">${data.temperature_2m[i + firstIndex]}${
+        this.weatherData.daily_units.temperature_2m_min
+      }</p>
+           <p class = "weather"><span class="card-side-smaller-text">${
+             weatherObj.weather
+           }</span></p>
+          </div>
         </div>
-        <p class = "weather">${weatherObj.weather}</p>
       </div>`;
       container.innerHTML += html;
     });
 
     container.closest("section").classList.remove("hidden");
-    this.applyScroll(container, "hourly");
+    // this.applyScroll(container, "hourly");
+  }
+
+  addListeners() {
+    const selectHours = document.getElementById("hours_select");
+    const selectDays = document.getElementById("days_select");
+
+    selectHours.addEventListener("change", () => {
+      this.renderHourlyWeather(selectHours.value);
+    });
+    selectDays.addEventListener("change", () => {
+      this.renderDailyWeather(selectDays.value);
+    });
   }
 
   applyScroll(container, sectionType) {
