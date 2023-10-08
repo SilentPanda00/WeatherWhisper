@@ -62,7 +62,7 @@ class WeatherApp {
             .closest('.card-side')
             .querySelector('.location').textContent;
           localStorage.setItem('selectedLocation', this.selectedLocation);
-          window.location.href = './src/html/weather.html';
+          window.location.href = '../html/weather.html';
         }
       });
     }
@@ -87,7 +87,7 @@ class WeatherApp {
   handleSearch() {
     this.selectedLocation = searchImput.value;
     localStorage.setItem('selectedLocation', this.selectedLocation);
-    window.location.href = '/src/html/weather.html';
+    window.location.href = '../html/weather.html';
   }
 }
 
