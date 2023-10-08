@@ -49,8 +49,10 @@ transporter.verify((error, success) => {
 //API ROUTES
 
 app.get("/sendMail", (req, res) => {
-  res.sendFile(path.join(__dirname, "/contact.html"));
+  res.sendFile(path.join("../", __dirname, "/contact.html"));
 });
+
+console.log(path);
 
 app.post("/sendMail", (req, res) => {
   const { message, name, email } = req.body; //the data gotten is in the body of the request
@@ -66,7 +68,7 @@ app.post("/sendMail", (req, res) => {
     .sendMail(mailOptions)
     .then(() => {
       //success
-      res.sendFile(path.join(__dirname, "/src/html/success.html"));
+      res.sendFile(path.join(__dirname, "/html/success.html"));
     })
     .catch((error) => {
       //error

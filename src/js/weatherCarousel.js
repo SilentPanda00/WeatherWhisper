@@ -58,7 +58,7 @@ class WeatherCarousel extends Carousel {
                   }</p>
                   <div>
                     <div class="weather-icon">
-                      <img  src ='./Pictures/flaticon/png/${
+                      <img  src ='./src/Pictures/flaticon/png/${
                         data.current_weather.is_day
                           ? weatherObj.iconDay
                           : weatherObj.iconNight || weatherObj.iconDay

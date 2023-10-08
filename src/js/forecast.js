@@ -144,10 +144,8 @@ class Forecast {
     this.displayTime();
     setInterval(() => this.displayTime(), 1000);
 
-    // setInterval(this.displayTime, 1000);
-
     document.getElementById("weather-icon").innerHTML = `<img
-      src="/Pictures/flaticon/png/${
+      src="../Pictures/flaticon/png/${
         this.weatherData.hourly.is_day[localHour]
           ? weatherObj.iconDay
           : weatherObj.iconNight || weatherObj.iconDay
@@ -196,7 +194,7 @@ class Forecast {
         <p class="date card-side-smaller-text">${day}</p>
         <div class="flex">
           <div class="weather-icon">
-            <img  src ='/Pictures/flaticon/png/${
+            <img  src ='../Pictures/flaticon/png/${
               weatherCode.get(data.weathercode[i + firstIndex]).iconDay
             }-color.png'>
           </div>
@@ -277,7 +275,7 @@ class Forecast {
         <p class="date"> <span class="card-side-smaller-text">${day}</span><br/>${hour}</p>
         <div class="flex">
           <div class="weather-icon">
-            <img  src ='/Pictures/flaticon/png/${icon}-color.png'>
+            <img  src ='../Pictures/flaticon/png/${icon}-color.png'>
           </div>
           <div class="flex">
             <p class="temperature">${data.temperature_2m[i + firstIndex]}${
