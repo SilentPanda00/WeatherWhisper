@@ -88,7 +88,7 @@ class WeatherApp {
     this.selectedLocation = searchImput.value;
     localStorage.setItem('selectedLocation', this.selectedLocation);
     if(window.location.pathname === "/index.html") window.location.href = './src/html/weather.html';
-    else window.location.href = '../html/weather.html';
+    else window.location.href = './weather.html';
   }
 }
 
