@@ -224,7 +224,8 @@ nav ul {
 nav a:hover,
 .mobile-menu:hover .mobile-button:hover,
 .close-menu-button,
-.theme:hover/*,
+.theme:hover
+/*,
 .card-side:hover*/ {
   transition-duration: 0.4s;
   background-color: var(--vibrant-blue);
@@ -554,6 +555,7 @@ select.light {
   height: 44px;
   line-height: 45px;
   font: inherit;
+  font-size: 1.25rem;
   color: inherit;
   background-color: inherit;
 }

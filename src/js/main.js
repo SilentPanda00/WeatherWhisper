@@ -24,8 +24,10 @@ class WeatherApp {
     }
 
     //change the theme if it is present in the localStorage
-    localStorage.getItem('theme') &&
+    if (localStorage.getItem('theme')) {
       this.changeVisualTheme(localStorage.getItem('theme'));
+      document.querySelector('.theme').firstChild.classList.add('fa-moon');
+    } else document.querySelector('.theme').firstChild.classList.add('fa-sun');
 
     // Set CSS variable for viewport height
     this.setVHVariable();
@@ -59,13 +61,14 @@ class WeatherApp {
     });
 
     document.querySelector('.theme').addEventListener('click', e => {
-      e.target.closest('.theme').firstChild.classList.toggle('fa-moon');
-      e.target.closest('.theme').firstChild.classList.toggle('fa-sun');
-
       if (!localStorage.getItem('theme')) {
         localStorage.setItem('theme', 'light');
+        e.target.closest('.theme').firstChild.classList.add('fa-moon');
+        e.target.closest('.theme').firstChild.classList.remove('fa-sun');
       } else {
         localStorage.removeItem('theme', 'light');
+        e.target.closest('.theme').firstChild.classList.add('fa-sun');
+        e.target.closest('.theme').firstChild.classList.remove('fa-moon');
       }
       this.changeVisualTheme('light');
     });
