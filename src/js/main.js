@@ -113,7 +113,7 @@ class WeatherApp {
     else window.location.href = './weather.html';
   }
 
-  async changeVisualTheme(theme) {
+  changeVisualTheme(theme) {
     const elements = [
       document.body,
       document.querySelector('main'),
@@ -122,8 +122,8 @@ class WeatherApp {
       ...document.querySelectorAll('section'),
       ...document.querySelectorAll('.card-side'),
       ...document.querySelectorAll('a'),
-      ...document.querySelectorAll('.current-weather > div'),
       ...document.querySelectorAll('.current-weather > div > span'),
+      ...document.querySelectorAll('.current-weather > div'),
       ...document.querySelectorAll('.card-side-smaller-text'),
     ];
 

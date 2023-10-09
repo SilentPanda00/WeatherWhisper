@@ -190,8 +190,10 @@ class Forecast {
       if (firstIndex > 6) day = 'Next ' + day;
 
       const html = `
-      <div class="card-side flex ${localStorage.getItem('theme')}">
-        <p class="date card-side-smaller-text">${day}</p>
+      <div class="card-side flex ${localStorage.getItem('theme') || ''}">
+        <p class="date card-side-smaller-text ${localStorage.getItem(
+          'theme'
+        )}">${day}</p>
         <div class="flex">
           <div class="weather-icon">
             <img  src ='../Pictures/flaticon/png/${
@@ -202,9 +204,9 @@ class Forecast {
             <p class="temperature">${data.temperature_2m_min[i + firstIndex]}-${
         data.temperature_2m_max[i + firstIndex]
       }${this.weatherData.daily_units.temperature_2m_min}</p>
-            <p class = "weather card-side-smaller-text">${
-              weatherCode.get(data.weathercode[i + firstIndex]).weather
-            }</p>
+            <p class = "weather card-side-smaller-text ${localStorage.getItem(
+              'theme'
+            )}">${weatherCode.get(data.weathercode[i + firstIndex]).weather}</p>
           </div>
         </div>
       </div>`;
@@ -272,7 +274,9 @@ class Forecast {
 
       const html = `
       <div class="card-side flex ${localStorage.getItem('theme')}">
-        <p class="date"> <span class="card-side-smaller-text">${day}</span><br/>${hour}</p>
+        <p class="date"> <span class="card-side-smaller-text ${localStorage.getItem(
+          'theme'
+        )}">${day}</span><br/>${hour}</p>
         <div class="flex">
           <div class="weather-icon">
             <img  src ='../Pictures/flaticon/png/${icon}-color.png'>
@@ -281,9 +285,9 @@ class Forecast {
             <p class="temperature">${data.temperature_2m[i + firstIndex]}${
         this.weatherData.daily_units.temperature_2m_min
       }</p>
-           <p class = "weather"><span class="card-side-smaller-text">${
-             weatherObj.weather
-           }</span></p>
+           <p class = "weather"><span class="card-side-smaller-text ${localStorage.getItem(
+             'theme'
+           )}">${weatherObj.weather}</span></p>
           </div>
         </div>
       </div>`;
