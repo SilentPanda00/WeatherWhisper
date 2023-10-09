@@ -1,22 +1,22 @@
-import { weatherCode } from "./data.js";
+import { weatherCode } from './data.js';
 
-const statusMsg = document.querySelector(".error");
+const statusMsg = document.querySelector('.error');
 
 class Forecast {
   constructor() {
     this.coords = {}; // Initialize coords object
     //Load location from localStorage
-    this.locationName = localStorage.getItem("selectedLocation");
+    this.locationName = localStorage.getItem('selectedLocation');
 
     //If it isn't in localStorage, try to get it  from geolocation
     if (!this.locationName) {
       this.getLocation()
-        .then((locationName) => {
+        .then(locationName => {
           this.locationName = locationName;
           this.init(); //Call the init after setting locationName
         })
         //Handle error getting locationName
-        .catch((error) => (statusMsg.textContent = error.message));
+        .catch(error => (statusMsg.textContent = error.message));
     } else {
       this.init(); //Call init if locationName is already available
     }
@@ -39,7 +39,7 @@ class Forecast {
   }
   async getLocation() {
     return new Promise((resolve, reject) => {
-      const success = async (position) => {
+      const success = async position => {
         try {
           const { latitude: lat, longitude: lon } = position.coords;
 
@@ -56,24 +56,24 @@ class Forecast {
         }
       };
 
-      const error = (e) => {
+      const error = e => {
         statusMsg.textContent = e.message;
-        statusMsg.textContent ??= "Unable to retrieve your location.";
+        statusMsg.textContent ??= 'Unable to retrieve your location.';
         reject(e);
       };
 
       // Checking if the geolocation api works
       if (!navigator.geolocation) {
-        statusMsg.textContent = "Geolocation is not supported by your browser.";
+        statusMsg.textContent = 'Geolocation is not supported by your browser.';
       } else {
-        statusMsg.textContent = "Locating...";
+        statusMsg.textContent = 'Locating...';
         navigator.geolocation.getCurrentPosition(success, error);
       }
     });
   }
 
   async getWeather() {
-    statusMsg.textContent = "Getting coords...";
+    statusMsg.textContent = 'Getting coords...';
     try {
       const coordsResponse = await fetch(
         `https://geocode.maps.co/search?q=${this.locationName}`
@@ -88,13 +88,13 @@ class Forecast {
       const coordsData = await coordsResponse.json();
 
       if (!coordsData.length) {
-        throw new Error("Wrong location name.");
+        throw new Error('Wrong location name.');
       }
 
       //getting the full name of the location
       this.locationName = coordsData[0].display_name;
 
-      statusMsg.textContent = "Getting weather data...";
+      statusMsg.textContent = 'Getting weather data...';
       const weatherResponse = await fetch(
         `https://api.open-meteo.com/v1/forecast?latitude=${coordsData[0].lat}&longitude=${coordsData[0].lon}&hourly=temperature_2m,apparent_temperature,precipitation_probability,weathercode,pressure_msl,surface_pressure,cloudcover,visibility,evapotranspiration,windspeed_10m,windspeed_80m,winddirection_10m,winddirection_80m,uv_index,uv_index_clear_sky,is_day&daily=weathercode,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,sunrise,sunset,uv_index_max,precipitation_sum,precipitation_hours,precipitation_probability_max,windspeed_10m_max,windgusts_10m_max,winddirection_10m_dominant,shortwave_radiation_sum,et0_fao_evapotranspiration&current_weather=true&timezone=auto&forecast_days=14&models=best_match`
       );
@@ -107,11 +107,11 @@ class Forecast {
 
       this.weatherData = await weatherResponse.json();
 
-      statusMsg.classList.add("hidden");
+      statusMsg.classList.add('hidden');
     } catch (error) {
       statusMsg.textContent = `Error: ${error.message}`;
     } finally {
-      localStorage.clear();
+      localStorage.removeItem('selectedLocation');
     }
   }
 
@@ -120,31 +120,31 @@ class Forecast {
       this.weatherData.hourly.weathercode[localHour]
     );
     const fields = [
-      "temperature_2m",
-      "windspeed_10m",
-      "winddirection_10m",
-      "apparent_temperature",
-      "cloudcover",
-      "precipitation_probability",
-      "surface_pressure",
-      "uv_index",
-      "visibility",
+      'temperature_2m',
+      'windspeed_10m',
+      'winddirection_10m',
+      'apparent_temperature',
+      'cloudcover',
+      'precipitation_probability',
+      'surface_pressure',
+      'uv_index',
+      'visibility',
     ];
-    fields.forEach((field) => {
+    fields.forEach(field => {
       document.getElementById(field).textContent =
         this.weatherData.hourly[field][localHour] +
         this.weatherData.hourly_units[field];
     });
 
-    document.getElementById("weather").textContent = weatherObj.weather;
+    document.getElementById('weather').textContent = weatherObj.weather;
 
-    document.getElementById("location").textContent = this.locationName;
+    document.getElementById('location').textContent = this.locationName;
 
     // displaying the time
     this.displayTime();
     setInterval(() => this.displayTime(), 1000);
 
-    document.getElementById("weather-icon").innerHTML = `<img
+    document.getElementById('weather-icon').innerHTML = `<img
       src="../Pictures/flaticon/png/${
         this.weatherData.hourly.is_day[localHour]
           ? weatherObj.iconDay
@@ -153,28 +153,28 @@ class Forecast {
     />`;
 
     document
-      .querySelector(".current-weather")
-      .closest("section")
-      .classList.remove("hidden");
+      .querySelector('.current-weather')
+      .closest('section')
+      .classList.remove('hidden');
   }
 
-  renderDailyWeather(value = "this-week") {
+  renderDailyWeather(value = 'this-week') {
     let firstIndex = 0;
     let lastIndex = 7;
-    if (value === "next-week") {
+    if (value === 'next-week') {
       firstIndex = 7;
       lastIndex = 14;
     }
-    const container = document.querySelector(".daily-weather");
-    container.innerHTML = "";
+    const container = document.querySelector('.daily-weather');
+    container.innerHTML = '';
     const weekdays = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
     ];
     const data = this.weatherData.daily;
 
@@ -183,14 +183,14 @@ class Forecast {
 
       let day =
         i === 0 && firstIndex === 0
-          ? "Today"
+          ? 'Today'
           : i === 1 && firstIndex === 0
-          ? "Tomorrow"
+          ? 'Tomorrow'
           : weekdays[date.getDay()];
-      if (firstIndex > 6) day = "Next " + day;
+      if (firstIndex > 6) day = 'Next ' + day;
 
       const html = `
-      <div class="card-side flex">
+      <div class="card-side flex ${localStorage.getItem('theme')}">
         <p class="date card-side-smaller-text">${day}</p>
         <div class="flex">
           <div class="weather-icon">
@@ -210,35 +210,35 @@ class Forecast {
       </div>`;
       container.innerHTML += html;
     });
-    container.closest("section").classList.remove("hidden");
+    container.closest('section').classList.remove('hidden');
     // adding the scroll on button functionality
 
     // this.applyScroll(container, "daily");
   }
 
-  renderHourlyWeather(value = "today") {
+  renderHourlyWeather(value = 'today') {
     let firstIndex = this.localHour;
     let lastIndex = firstIndex + 24;
     switch (value) {
-      case "tomorow":
+      case 'tomorow':
         {
           firstIndex = 24;
           lastIndex = firstIndex + 24;
         }
         break;
-      case "next-72":
+      case 'next-72':
         {
           firstIndex = this.localHour;
           lastIndex = firstIndex + 72;
         }
         break;
-      case "all-week":
+      case 'all-week':
         {
           firstIndex = 0;
           lastIndex = 168;
         }
         break;
-      case "next-week":
+      case 'next-week':
         {
           firstIndex = 168;
           lastIndex = 168 * 2;
@@ -246,24 +246,24 @@ class Forecast {
         break;
       default:
     }
-    const container = document.querySelector(".hourly-weather");
-    container.innerHTML = "";
+    const container = document.querySelector('.hourly-weather');
+    container.innerHTML = '';
     const weekdays = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
     ];
     const data = this.weatherData.hourly;
     data.time.slice(firstIndex, lastIndex).forEach((dateString, i) => {
       const date = new Date(dateString);
-      const hour = String(date.getHours()).padStart(2, "0") + ":00";
+      const hour = String(date.getHours()).padStart(2, '0') + ':00';
       let day = weekdays[new Date(dateString).getDay()];
 
-      if (firstIndex === 168) day = "Next " + day;
+      if (firstIndex === 168) day = 'Next ' + day;
       const weatherObj = weatherCode.get(data.weathercode[i + firstIndex]);
       const isDay = data.is_day[date.getHours()];
       const icon = isDay
@@ -271,7 +271,7 @@ class Forecast {
         : weatherObj.iconNight || weatherObj.iconDay;
 
       const html = `
-      <div class="card-side flex">
+      <div class="card-side flex ${localStorage.getItem('theme')}">
         <p class="date"> <span class="card-side-smaller-text">${day}</span><br/>${hour}</p>
         <div class="flex">
           <div class="weather-icon">
@@ -290,28 +290,28 @@ class Forecast {
       container.innerHTML += html;
     });
 
-    container.closest("section").classList.remove("hidden");
+    container.closest('section').classList.remove('hidden');
     // this.applyScroll(container, "hourly");
   }
 
   addListeners() {
-    const selectHours = document.getElementById("hours_select");
-    const selectDays = document.getElementById("days_select");
+    const selectHours = document.getElementById('hours_select');
+    const selectDays = document.getElementById('days_select');
 
-    selectHours.addEventListener("change", () => {
+    selectHours.addEventListener('change', () => {
       this.renderHourlyWeather(selectHours.value);
     });
-    selectDays.addEventListener("change", () => {
+    selectDays.addEventListener('change', () => {
       this.renderDailyWeather(selectDays.value);
     });
   }
 
   applyScroll(container, sectionType) {
     const cardsGap = Number(
-      window.getComputedStyle(container).getPropertyValue("gap").slice(0, -2)
+      window.getComputedStyle(container).getPropertyValue('gap').slice(0, -2)
     );
     const cardWidth = container
-      .querySelector(".card-side")
+      .querySelector('.card-side')
       .getBoundingClientRect().width;
     const containerLength = Math.floor(container.getBoundingClientRect().width);
 
@@ -320,7 +320,7 @@ class Forecast {
 
     document
       .querySelector(`.btn-left-${sectionType}`)
-      .addEventListener("click", () => {
+      .addEventListener('click', () => {
         this.animateScrollContent(
           container.scrollLeft - scrollDistance,
           200,
@@ -329,7 +329,7 @@ class Forecast {
       });
     document
       .querySelector(`.btn-right-${sectionType}`)
-      .addEventListener("click", () => {
+      .addEventListener('click', () => {
         this.animateScrollContent(
           container.scrollLeft + scrollDistance,
           200,
@@ -355,7 +355,7 @@ class Forecast {
     const startTime = performance.now();
 
     // Animate the scroll
-    const animateScroll = (currentTime) => {
+    const animateScroll = currentTime => {
       const elapsedTime = currentTime - startTime;
 
       // Use easeInOutQuad easing function for smooth animation
@@ -390,16 +390,16 @@ class Forecast {
       const locationTimeZone = await this.weatherData.timezone;
       const options = {
         timeZone: locationTimeZone,
-        weekday: "long",
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        hour: "numeric",
-        minute: "numeric",
-        second: "numeric",
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
       };
 
-      this.localTime = new Date().toLocaleString("en-US", options);
+      this.localTime = new Date().toLocaleString('en-US', options);
     } catch (error) {
       statusMsg.textContent = `Error: ${error.message}`;
     }
@@ -407,10 +407,10 @@ class Forecast {
 
   getCorrectHour() {
     let hour = Number(this.localTime.slice(-11, -9));
-    if (this.localTime.endsWith("PM")) {
+    if (this.localTime.endsWith('PM')) {
       hour += 12;
     }
-    if (this.localTime.endsWith("AM") && hour === 12) {
+    if (this.localTime.endsWith('AM') && hour === 12) {
       hour = 0;
     }
     this.localHour = hour;
@@ -420,8 +420,8 @@ class Forecast {
     this.getCorrectTime();
     this.getCorrectHour();
     const localHour = this.localTime;
-    document.getElementById("time").textContent = `${
-      localHour.split(",")[0]
+    document.getElementById('time').textContent = `${
+      localHour.split(',')[0]
     } ${localHour.slice(-11)}`;
   }
 }

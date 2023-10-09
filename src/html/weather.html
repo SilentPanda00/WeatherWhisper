@@ -30,7 +30,7 @@
     <!-- WEBPAGE TITLE ICON -->
     <link
       rel="shortcut icon"
-      href="/Pictures/weather_icon.png"
+      href="../Pictures/weather_icon.png"
       type="image/x-icon"
     />
 
@@ -94,6 +94,7 @@
               ><i class="fa fa-solid fa-magnifying-glass"></i
             ></label>
           </div>
+          <button class="theme"><i class="fa-regular fa-sun"></i></button>
         </div>
       </nav>
     </header>
@@ -118,33 +119,35 @@
             <p class="time">Local time: <span id="time"></span></p>
           </div>
 
-          <div class="wind-speed">
+          <div class="wind-speed flex">
             Wind speed <span id="windspeed_10m"></span>
           </div>
-          <div class="wind-direction">
+          <div class="wind-direction flex">
             Wind direction <span id="winddirection_10m"></span>
           </div>
 
-          <div class="apparent-temp">
+          <div class="apparent-temp flex">
             Apparent temperature <span id="apparent_temperature"></span>
           </div>
 
-          <div class="cloud-cover">
+          <div class="cloud-cover flex">
             Clowd cover <span id="cloudcover"></span>
           </div>
 
-          <div class="precip-prob">
+          <div class="precip-prob flex">
             Precipitation probability
             <span id="precipitation_probability"></span>
           </div>
 
-          <div class="surface-pressure">
+          <div class="surface-pressure flex">
             Surface pressure <span id="surface_pressure"></span>
           </div>
 
-          <div class="uv-index">UV index <span id="uv_index"></span></div>
+          <div class="uv-index flex">UV index <span id="uv_index"></span></div>
 
-          <div class="visibility">Visibility <span id="visibility"></span></div>
+          <div class="visibility flex">
+            Visibility <span id="visibility"></span>
+          </div>
         </div>
       </section>
       <section class="hidden">

@@ -36,7 +36,7 @@ class LocationsPreview {
     const weatherObj = weatherCode.get(data.current_weather.weathercode);
     let html;
     html = `
-                <div class="card-side">
+                <div class="card-side ${localStorage.getItem('theme')}">
                   <p class="location"><i class="fa-solid fa-location-dot"></i> ${
                     coord.display_name.split(',')[0]
                   }</p>

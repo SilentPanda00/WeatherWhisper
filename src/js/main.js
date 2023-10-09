@@ -23,6 +23,10 @@ class WeatherApp {
       });
     }
 
+    //change the theme if it is present in the localStorage
+    localStorage.getItem('theme') &&
+      this.changeVisualTheme(localStorage.getItem('theme'));
+
     // Set CSS variable for viewport height
     this.setVHVariable();
   }
@@ -40,6 +44,10 @@ class WeatherApp {
       }
     });
 
+    searchBtn.addEventListener('click', () => {
+      searchImput.value && this.handleSearch();
+    });
+
     // Event listener for mobile menu button
     menuBtn.addEventListener('click', () => {
       document.querySelector('.mobile').classList.toggle('side');
@@ -50,7 +58,19 @@ class WeatherApp {
       document.querySelector('.mobile').classList.toggle('side');
     });
 
-    // Initialize the WeatherCarousel if the carousel exists on the page
+    document.querySelector('.theme').addEventListener('click', e => {
+      e.target.closest('.theme').firstChild.classList.toggle('fa-moon');
+      e.target.closest('.theme').firstChild.classList.toggle('fa-sun');
+
+      if (!localStorage.getItem('theme')) {
+        localStorage.setItem('theme', 'light');
+      } else {
+        localStorage.removeItem('theme', 'light');
+      }
+      this.changeVisualTheme('light');
+    });
+
+    // render the preview for locations on the main page
     if (locationsContainer) {
       window.addEventListener('load', () => {
         this.renderLocationsPreview();
@@ -87,8 +107,29 @@ class WeatherApp {
   handleSearch() {
     this.selectedLocation = searchImput.value;
     localStorage.setItem('selectedLocation', this.selectedLocation);
-    if(window.location.pathname.includes("index.html")) window.location.href = './src/html/weather.html';
+    console.log(window.location.href);
+    if (window.location.href.includes('/index.html'))
+      window.location.href = './src/html/weather.html';
     else window.location.href = './weather.html';
+  }
+
+  async changeVisualTheme(theme) {
+    const elements = [
+      document.body,
+      document.querySelector('main'),
+      document.querySelector('.mobile'),
+      ...document.querySelectorAll('select'),
+      ...document.querySelectorAll('section'),
+      ...document.querySelectorAll('.card-side'),
+      ...document.querySelectorAll('a'),
+      ...document.querySelectorAll('.current-weather > div'),
+      ...document.querySelectorAll('.current-weather > div > span'),
+      ...document.querySelectorAll('.card-side-smaller-text'),
+    ];
+
+    elements.forEach(element => {
+      element.classList.toggle(theme);
+    });
   }
 }
 
