@@ -121,6 +121,7 @@ class WeatherApp {
       document.body,
       document.querySelector('main'),
       document.querySelector('.mobile'),
+      ...document.querySelectorAll('form'),
       ...document.querySelectorAll('select'),
       ...document.querySelectorAll('section'),
       ...document.querySelectorAll('.card-side'),

@@ -550,6 +550,10 @@ select.light {
   color: var(--dark-blue);
 }
 
+form.light {
+  background-color: var(--vibrant-blue);
+}
+
 .theme {
   width: 45px;
   height: 44px;
