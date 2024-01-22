@@ -9,13 +9,15 @@ class LocationsPreview {
     const weatherPr = [];
     locations.forEach(location => {
       coordsPr.push(
-        fetch(`https://geocode.maps.co/search?q={${location}}`).then(response =>
-          response.json()
+        fetch(`
+        http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=5&appid=8fe1694a9245bbcea0d07b1ffc73486c`).then(
+          response => response.json()
         )
       );
     });
     const coords = await Promise.all(coordsPr);
     this.coords = coords;
+    // console.log(coords);
     coords.forEach(coord => {
       weatherPr.push(
         fetch(
@@ -34,11 +36,12 @@ class LocationsPreview {
 
   renderCard(data, coord) {
     const weatherObj = weatherCode.get(data.current_weather.weathercode);
+    console.log(coord.name);
     let html;
     html = `
                 <div class="card-side ${localStorage.getItem('theme')}">
                   <p class="location"><i class="fa-solid fa-location-dot"></i> ${
-                    coord.display_name.split(',')[0]
+                    coord.name.split(',')[0]
                   }</p>
                   <div>
                     <div class="weather-icon">

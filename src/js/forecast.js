@@ -45,10 +45,11 @@ class Forecast {
 
           //getting the name of the location
           const response = await fetch(
-            `https://geocode.maps.co/reverse?lat=${lat}&lon=${lon}`
+            `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=5&appid=8fe1694a9245bbcea0d07b1ffc73486c`
           );
           const data = await response.json();
-          const locationName = data.address.city;
+          console.log(data);
+          const locationName = data.name;
 
           resolve(locationName);
         } catch (err) {
@@ -76,7 +77,7 @@ class Forecast {
     statusMsg.textContent = 'Getting coords...';
     try {
       const coordsResponse = await fetch(
-        `https://geocode.maps.co/search?q=${this.locationName}`
+        `http://api.openweathermap.org/geo/1.0/direct?q=${'Bucharest'}&limit=5&appid=8fe1694a9245bbcea0d07b1ffc73486c`
       );
 
       if (!coordsResponse.ok) {
@@ -86,6 +87,7 @@ class Forecast {
       }
 
       const coordsData = await coordsResponse.json();
+      console.log(coordsData);
 
       if (!coordsData.length) {
         throw new Error('Wrong location name.');
